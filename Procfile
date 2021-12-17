@@ -1,0 +1,1 @@
+web: gunicorn CourseScheduling.wsgi -- log-file -

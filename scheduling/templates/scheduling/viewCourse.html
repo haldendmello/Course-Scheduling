@@ -1,0 +1,49 @@
+{% extends "scheduling/layout.html" %}
+
+{% block title %}
+    Course
+{% endblock %}
+
+{% block body %}
+
+ 
+<div class="container">
+  <a href="{% url 'index' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">Add Course</h2></a>
+
+
+  {% if courses %}
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Course</th>
+          <th scope="col">Remove</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+
+      {% for course in courses %}
+        <tr>
+          <td>{{course.course_name}}</td>
+          <form action="{% url 'removcourses' course.id %}" method="post">
+            {% csrf_token %}
+            <td><button type="submit"  class="btn btn-danger">Remove</button></td>
+          </form>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+  {% else %}
+    <h1> Please Add Course.</h1>
+  {% endif %}
+
+    
+</div>
+
+
+
+
+{% endblock %}

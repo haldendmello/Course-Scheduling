@@ -1,0 +1,28 @@
+{% extends "scheduling/layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+ 
+<div class="text-center mt-5">
+    <form style="max-width:480px;margin:auto;" action={% url 'login' %} method="post" >
+
+        {% csrf_token %}
+        <label class="sr-only">Username</label>
+        <input placeholder="Username" type="text" name="username" class="form-control" Required
+            autofocus>
+
+        <label class="sr-only">Password</label>
+        <input placeholder="Password" type="password" name="password" class="form-control" Required
+            autofocus>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+    </form>
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+
+</div>
+
+
+
+{% endblock %}

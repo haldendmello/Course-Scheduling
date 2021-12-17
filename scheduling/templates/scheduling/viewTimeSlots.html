@@ -1,0 +1,45 @@
+{% extends "scheduling/layout.html" %}
+
+{% block title %}
+    Add Time
+{% endblock %}
+
+{% block body %}
+
+ 
+<div class="container">
+  <a href="{% url 'index' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">Add Time</h2></a>
+
+    {% if times %}
+    
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {% for time in times %}
+          <tr>
+            <td>{{time.time}}</td>
+            <form action="{% url 'removetime' time.id %}" method="post">
+              {% csrf_token %}
+              <td><button type="submit"  class="btn btn-danger">Remove</button></td>
+            </form>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      
+    {% else %}
+      <h1> Please Add Time. </h1>
+    {% endif %}
+    
+</div>
+
+
+
+
+{% endblock %}

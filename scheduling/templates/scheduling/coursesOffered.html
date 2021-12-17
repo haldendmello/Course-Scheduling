@@ -1,0 +1,70 @@
+{% extends "scheduling/layout.html" %}
+
+{% block title %}
+    Course Offered
+{% endblock %}
+
+{% block body %}
+
+ 
+<div class="container">
+  <a href="{% url 'index' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">Add Course Offered</h2></a>
+
+
+    {% if coursesoff %}
+    
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Course Name</th>
+            <th scope="col">Student Enrollment</th>
+            <th scope="col">Time</th>
+            <th scope="col">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for course in coursesoff %}
+          <tr>
+            <td>
+              {{course.coursePre.course_name}}
+              {% if course.coursePre.checkgraduate == "postgraduate" %}
+              <p class="font-weight-light">Post Graduate</p>
+              {% endif %}
+            </td>
+            <td>{{course.studentEnrollment}}</td>
+              <td>
+              {% for t in course.times.all %}
+                <p class="text-success">{{t.time}}</p>
+              {% endfor %}
+              </td>
+            <form action="{% url 'removecoursesoffered' course.id %}" method="post">
+              {% csrf_token %}
+              <td><button type="submit"  class="btn btn-danger">Remove</button></td>
+            </form>
+          </tr>
+        {% endfor %}
+          
+        </tbody>
+      </table>
+
+      <form action="{% url 'schedule' %}" method="post">
+        {% csrf_token %}
+        <button type="submit"  class="btn btn-primary">Schedule</button>
+      </form>
+
+    {% else %}
+
+      <h1> Please Add Course Offered.</h1>
+
+    {% endif %}
+
+
+      
+
+    
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends "scheduling/layout.html" %}
+
+{% block title %}
+    Course Scheduling
+{% endblock %}
+
+{% block body %}
+    
+
+<div class="container"  style="padding-top : 20px">
+    <div class="row">
+
+    {% comment %} column 1 {% endcomment %}
+        <div class="col">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="text-center mt-5">
+                    <form style="max-width:480px;margin:auto;" action="{% url 'coursesOffered' %}" method="post">
+                        {% csrf_token %}
+                        <h2 class="h3 mt-4 mb-4 font-weight-normal">Courses Offered</h2>
+
+                        <label class="sr-only">Course Name</label>
+
+                        <select name="selectCourse" class="form-select" aria-label="Default select example" Required>
+                            <option disabled selected value> -- select an option -- </option>
+                            {% for course in courses %}
+                                <option value="{{course.id}}">{{course.course_name}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+
+                        <label style="padding-top: 15px" class="sr-only">Time Preferences</label>
+
+                        <select name="selectTime1" class="form-select" aria-label="Default select example">
+                            <option disabled selected value> -- select an option -- </option>
+                            {% for time in times %}
+                                <option value="{{time.id}}">{{time.time}}</option>
+                            {% endfor %}
+                        </select>
+                        <select name="selectTime2" class="form-select" aria-label="Default select example">
+                            <option disabled selected value> -- select an option -- </option>
+                            {% for time in times %}
+                                <option value="{{time.id}}">{{time.time}}</option>
+                            {% endfor %}
+                        </select><select name="selectTime3" class="form-select" aria-label="Default select example">
+                            <option disabled selected value> -- select an option -- </option>
+                            {% for time in times %}
+                                <option value="{{time.id}}">{{time.time}}</option>
+                            {% endfor %}
+                        </select><select name="selectTime4" class="form-select" aria-label="Default select example">
+                            <option disabled selected value> -- select an option -- </option>
+                            {% for time in times %}
+                                <option value="{{time.id}}">{{time.time}}</option>
+                            {% endfor %}
+                        </select><select name="selectTime5" class="form-select" aria-label="Default select example">
+                            <option disabled selected value> -- select an option -- </option>
+                            {% for time in times %}
+                                <option value="{{time.id}}">{{time.time}}</option>
+                            {% endfor %}
+                        </select>
+
+                        
+
+                        <br>
+                        <label style="padding-top: 15px" class="sr-only">Student Enrollment</label>
+                        <input type="number" min="10" max="300" name="studentEnrollment" id="Enrollment" placeholder="Enter Class Capacity" class="form-control" Required autofocus>
+                        <div class="mt-3">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+                        </div>
+
+                    </form>
+                    <a href="{% url 'coursesOffered' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">View Courses Offered</h2></a>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} Class Room and Capacity {% endcomment %}
+        <div class="col">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+                <div class="text-center mt-5">
+                    <form style="max-width:480px;margin:auto;" action="{% url 'addClassroom' %}" method="post">
+                        {% csrf_token %}
+                        <h2 class="h3 mt-4 mb-4 font-weight-normal">Enter Class Room Details</h2>
+
+                        <label class="sr-only">Class Name</label>
+                        <input type="text" id="Class Name" name="classname" placeholder="Enter Class Name" class="form-control" Required autofocus>
+
+                        <label style="padding-top: 15px" class="sr-only">Capacity</label>
+                        <input type="number" min="10" max="300" name="capacity" id="Capacity" placeholder="Enter Class Capacity" class="form-control" Required autofocus>
+                        <div class="mt-3">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" id="submitClassRoom" value="Submit">
+                        </div>
+
+                    </form>
+
+                    <a href="{% url 'addClassroom' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">View Classes</h2></a>
+                </div>
+
+            </div>
+        </div>
+        <div class="w-100"></div>
+
+        {% comment %} Time Slots {% endcomment %}
+
+        <div class="col">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+                <div class="text-center mt-5">
+                    <form style="max-width:480px;margin:auto;" action="{% url 'timeSlots' %}" method="post">
+                        {% csrf_token %}
+                        <h2 class="h3 mt-4 mb-4 font-weight-normal">Enter Time Slots</h2>
+
+                        <label class="sr-only">Time</label>
+                        <input type="time" id="Time Name" name="timename" placeholder="Enter Time" class="form-control" Required autofocus>
+
+                        <div class="mt-3">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+                        </div>
+
+                    </form>
+
+                    <a href="{% url 'timeSlots' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">View Time</h2></a>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} Course Names {% endcomment %}
+        <div class="col">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="text-center mt-5">
+                    <form style="max-width:480px;margin:auto;" action="{% url 'addCoures' %}" method="post">
+                        {% csrf_token %}
+                        <h2 class="h3 mt-4 mb-4 font-weight-normal">Enter Course</h2>
+                        <label class="sr-only">Course Name</label>
+                        <select name="graduate" class="form-select" aria-label="Default select example">
+                            <option value="undergraduate">Under-Graduate</option>
+                            <option value="postgraduate">Post-Graduate</option>
+                        </select>
+
+                        <label class="sr-only">Course Name</label>
+                        <input type="text" id="Course Name" name="coursename" placeholder="Enter Course Name" class="form-control" Required autofocus>
+                        <div class="mt-3">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+                        </div>
+
+                    </form>
+
+                    <a href="{% url 'addCoures' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">View Courses</h2></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

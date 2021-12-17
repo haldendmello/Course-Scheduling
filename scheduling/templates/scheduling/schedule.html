@@ -1,0 +1,82 @@
+{% extends "scheduling/layout.html" %}
+
+{% block title %}
+    Schedule
+{% endblock %}
+
+{% block body %}
+
+ 
+<div class="container">
+  <a href="{% url 'coursesOffered' %}"><h2 class="h3 mt-4 mb-4 font-weight-normal">Courses Offered</h2></a>
+
+
+
+  <table class="table table-bordered">
+
+    {% if times|length != 0 and scheduledCourses|length != 0 %}
+    
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+
+            {% for time in times %}
+                <th scope="col">{{time.time}}</th>
+            {% endfor %}
+            
+            </tr>
+        </thead>
+
+    {% else %}
+
+        <h1>Please Add all Details.</h1>
+
+    {% endif %}
+
+    <tbody>
+
+        {% for list in scheduledCourses %}
+                <tr>
+                    <th scope="row">Class Room : {{list.0}}<br>Capacity : {{list.1}}</th>
+                    {% for output in list|slice:"2:" %}   
+                            <td>
+                                {{output}}
+                            </td>
+                    {% endfor %}
+                </tr>
+        {% endfor %}
+        
+    </tbody>
+  </table>
+
+  {% for errorMessage in errorMessageList %}
+    <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+    </div>
+
+  {% endfor %}
+
+  <blockquote class="blockquote">
+    <p>Functional Requirements.</p>
+  </blockquote>
+
+  <ul class="list-unstyled">
+    <li>Nested lists:
+      <ul>
+        <li>No more than one course should be scheduled at the same time in the same room.</li>
+        <li>The classroom capacity should be more than the expected enrollment of the course.</li>
+        <li>Preference is given to post-graduate courses over undergraduate courses for scheduling.</li>
+        <li>The post-graduate (undergraduate) courses should be scheduled in the order they appear in the input, and the highest possible priority of an instructor should be given. If no priority is specified, any class and time can be assigned. If any priority is incorrect, it is to be discarded.</li>
+        <li>No two post-graduate courses should be scheduled at the same time.</li>
+        <li>If no preference is specified for a course, the course should be scheduled in any manner that does not violate these constraints.</li>
+
+      </ul>
+    </li>
+  </ul>
+        
+</div>
+
+
+
+
+{% endblock %}
