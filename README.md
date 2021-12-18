@@ -8,28 +8,27 @@
 
 ### Login Page
 
-![Archived Page](images/login.gif)
-
+![Login Page](Images/login.gif)
 
 ### Schedule Page
 
-![Archived Page](images/schedule.gif)
+![Schedule Page](Images/schedule.gif)
 
 ### Add Courses Offered
 
-![Archived Page](images/CoursesOffered.gif)
+![Add Courses Offered](Images/CoursesOffered.gif)
 
 ### Add Class
 
-![Inbox Page](images/AddClass.gif)
+![Inbox Page](Images/AddClass.gif)
 
 ### Add Course Name
 
-![Sent Page](images/AddCourseName.gif)
+![Add Course Name](Images/AddCourseName.gif)
 
 ### Add Time
 
-![Compose Page](images/AddTime.gif)
+![Add Time](Images/AddTime.gif)
 
 
 
